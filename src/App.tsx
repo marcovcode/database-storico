@@ -30,7 +30,7 @@ const App = () => {
                 <input
                     ref={searchRef}
                     type="text"
-                    className="input input-primary w-96"
+                    className="input input-primary w-96 placeholder:text-primary placeholder:opacity-40"
                     placeholder="Anno, avvenimento, parola chiave..."
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}

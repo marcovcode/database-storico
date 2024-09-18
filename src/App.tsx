@@ -14,10 +14,14 @@ const App = () => {
     }, []);
 
     return (
-        <div className="p-4 font-playfair">
-            <div className="flex h-dvh flex-col items-center justify-center gap-4">
+        <div className="font-playfair">
+            <div
+                className={`absolute left-1/2 -translate-x-1/2 -translate-y-1/2 space-y-4 transition-all duration-500 ${
+                    !searchValue ? "top-1/2" : "top-4"
+                }`}
+            >
                 <h1
-                    className={`text-5xl font-bold transition-opacity duration-200 ${
+                    className={`text-center text-5xl font-bold transition-opacity duration-500 ${
                         searchValue ? "opacity-0" : "opacity-100"
                     }`}
                 >

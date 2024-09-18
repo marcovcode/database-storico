@@ -21,7 +21,7 @@ const App = () => {
                 }`}
             >
                 <h1
-                    className={`text-center text-5xl font-bold text-primary transition-opacity duration-500 ${
+                    className={`text-center text-5xl font-black text-primary transition-opacity duration-500 ${
                         searchValue ? "opacity-0" : "opacity-100"
                     }`}
                 >

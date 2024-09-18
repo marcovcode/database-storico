@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
 
 const App = () => {
-    const inputRef = useRef<HTMLInputElement>(null);
+    const searchRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         const handleKeyDown = () => {
-            if (inputRef.current) inputRef.current.focus();
+            if (searchRef.current) searchRef.current.focus();
         };
 
         window.addEventListener("keydown", handleKeyDown);
@@ -17,7 +17,7 @@ const App = () => {
             <div className="flex h-dvh flex-col items-center justify-center gap-4">
                 <h1 className="text-5xl font-bold">Database Storico</h1>
                 <input
-                    ref={inputRef}
+                    ref={searchRef}
                     type="text"
                     className="input input-primary w-96"
                     placeholder="Anno, avvenimento, parola chiave..."

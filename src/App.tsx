@@ -1,5 +1,9 @@
 const App = () => {
-    return "Database storico";
+    return (
+        <div className="font-playfair">
+            <h1>Database Storico</h1>
+        </div>
+    );
 };
 
 export default App;

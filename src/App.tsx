@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useGetDates } from "./features/dates/useGetDates";
+import { Tables } from "./types";
 
 const App = () => {
     const searchRef = useRef<HTMLInputElement>(null);
     const [searchValue, setSearchValue] = useState("");
 
-    const { dates, isLoading } = useGetDates();
+    const { dates } = useGetDates();
 
     useEffect(() => {
         const handleKeyDown = () => {
@@ -16,9 +17,23 @@ const App = () => {
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, []);
 
-    useEffect(() => {
-        if (!isLoading) console.log(dates);
-    }, [isLoading, dates]);
+    const filteredDates = searchValue
+        ? dates!.filter((date: Tables<"dates">) => {
+              const searchLower = searchValue.toLowerCase();
+
+              const yearStart = String(date.year_start || "").toLowerCase();
+              const yearEnd = String(date.year_end || "").toLowerCase();
+              const title = (date.title || "").toLowerCase();
+              const insight = (date.insight || "").toLowerCase();
+
+              return (
+                  yearStart.includes(searchLower) ||
+                  yearEnd.includes(searchLower) ||
+                  title.includes(searchLower) ||
+                  insight.includes(searchLower)
+              );
+          })
+        : [];
 
     return (
         <div className="font-playfair">
@@ -42,6 +57,20 @@ const App = () => {
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
                 />
+            </div>
+
+            <div>
+                {filteredDates.length > 0
+                    ? filteredDates.map((date) => (
+                          <div key={date.id}>
+                              <h2>{date.title}</h2>
+                              <p>
+                                  {date.year_start} - {date.year_end}
+                              </p>
+                              <p>{date.insight}</p>
+                          </div>
+                      ))
+                    : searchValue && <p>No results found</p>}
             </div>
         </div>
     );

@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { useGetDates } from "./features/dates/useGetDates";
 
 const App = () => {
     const searchRef = useRef<HTMLInputElement>(null);
     const [searchValue, setSearchValue] = useState("");
+
+    const { dates, isLoading } = useGetDates();
 
     useEffect(() => {
         const handleKeyDown = () => {
@@ -12,6 +15,10 @@ const App = () => {
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, []);
+
+    useEffect(() => {
+        if (!isLoading) console.log(dates);
+    }, [isLoading, dates]);
 
     return (
         <div className="font-playfair">

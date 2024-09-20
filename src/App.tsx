@@ -69,26 +69,34 @@ const App = () => {
             </div>
 
             <div
-                className={`mt-20 grid grid-cols-1 gap-4 duration-500 lg:grid-cols-2 ${searchValue ? "opacity-100" : "opacity-0"}`}
+                className={`mt-20 duration-500 ${searchValue ? "opacity-100" : "opacity-0"}`}
             >
-                {filteredDates.length > 0
-                    ? filteredDates.map((date) => (
-                          <Card key={date.id}>
-                              <CardHeader>
-                                  <CardTitle className="text-primary">
-                                      {date.title}
-                                  </CardTitle>
-                                  <CardDescription>
-                                      {date.year_start}
-                                      {date.year_end && " - " + date.year_end}
-                                  </CardDescription>
-                              </CardHeader>
-                              <CardContent>
-                                  <p>{date.insight}</p>
-                              </CardContent>
-                          </Card>
-                      ))
-                    : searchValue && <p>No results found</p>}
+                {filteredDates.length > 0 ? (
+                    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                        {filteredDates.map((date) => (
+                            <Card key={date.id}>
+                                <CardHeader>
+                                    <CardTitle className="text-primary">
+                                        {date.title}
+                                    </CardTitle>
+                                    <CardDescription>
+                                        {date.year_start}
+                                        {date.year_end && " - " + date.year_end}
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent>
+                                    <p>{date.insight}</p>
+                                </CardContent>
+                            </Card>
+                        ))}
+                    </div>
+                ) : (
+                    searchValue && (
+                        <p className="text-center text-primary">
+                            Nessun avvenimento trovato.
+                        </p>
+                    )
+                )}
             </div>
         </div>
     );

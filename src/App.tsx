@@ -2,6 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { useGetDates } from "./features/dates/useGetDates";
 import { Tables } from "./types";
 import { Input } from "./ui/input";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "./ui/card";
 
 const App = () => {
     const searchRef = useRef<HTMLInputElement>(null);
@@ -37,7 +44,7 @@ const App = () => {
         : [];
 
     return (
-        <div className="font-playfair">
+        <div className="p-4 font-playfair">
             <div
                 className={`absolute left-1/2 -translate-x-1/2 -translate-y-1/2 space-y-4 transition-all duration-500 ${
                     !searchValue ? "top-1/2" : "top-4"
@@ -60,16 +67,23 @@ const App = () => {
                 />
             </div>
 
-            <div>
+            <div className="mt-20 grid grid-cols-1 gap-4 lg:grid-cols-2">
                 {filteredDates.length > 0
                     ? filteredDates.map((date) => (
-                          <div key={date.id}>
-                              <h2>{date.title}</h2>
-                              <p>
-                                  {date.year_start} - {date.year_end}
-                              </p>
-                              <p>{date.insight}</p>
-                          </div>
+                          <Card key={date.id}>
+                              <CardHeader>
+                                  <CardTitle className="text-primary">
+                                      {date.title}
+                                  </CardTitle>
+                                  <CardDescription>
+                                      {date.year_start}
+                                      {date.year_end && " - " + date.year_end}
+                                  </CardDescription>
+                              </CardHeader>
+                              <CardContent>
+                                  <p>{date.insight}</p>
+                              </CardContent>
+                          </Card>
                       ))
                     : searchValue && <p>No results found</p>}
             </div>

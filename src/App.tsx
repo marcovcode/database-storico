@@ -46,7 +46,7 @@ const App = () => {
     return (
         <div className="p-4 font-playfair">
             <div
-                className={`absolute left-1/2 -translate-x-1/2 -translate-y-1/2 space-y-4 transition-all duration-500 ${
+                className={`absolute left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 space-y-4 transition-all duration-500 ${
                     !searchValue ? "top-1/2" : "top-4"
                 }`}
             >
@@ -57,6 +57,7 @@ const App = () => {
                 >
                     Database Storico
                 </h1>
+
                 <Input
                     ref={searchRef}
                     type="text"
@@ -67,7 +68,9 @@ const App = () => {
                 />
             </div>
 
-            <div className="mt-20 grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <div
+                className={`mt-20 grid grid-cols-1 gap-4 duration-500 lg:grid-cols-2 ${searchValue ? "opacity-100" : "opacity-0"}`}
+            >
                 {filteredDates.length > 0
                     ? filteredDates.map((date) => (
                           <Card key={date.id}>

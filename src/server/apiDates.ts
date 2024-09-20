@@ -1,4 +1,4 @@
-import supabase from "./supabase";
+import supabase from "../lib/supabase";
 
 export const getDates = async () => {
     const { data: dates, error } = await supabase.from("dates").select("*");

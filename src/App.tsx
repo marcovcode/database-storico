@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useGetDates } from "./features/dates/useGetDates";
 import { Tables } from "./types";
+import { Input } from "./ui/input";
 
 const App = () => {
     const searchRef = useRef<HTMLInputElement>(null);
@@ -49,10 +50,10 @@ const App = () => {
                 >
                     Database Storico
                 </h1>
-                <input
+                <Input
                     ref={searchRef}
                     type="text"
-                    className="input input-primary w-96 placeholder:text-primary placeholder:opacity-40"
+                    className="w-96"
                     placeholder="Anno, avvenimento, parola chiave..."
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
